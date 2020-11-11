@@ -1,0 +1,83 @@
+<div *ngIf="data.mode=='create'">
+    <form #createForm="ngForm">
+        <div mat-dialog-content>
+            <button type="button" class="close float-right btn btn-outline-basic" aria-label="Close"
+                (click)="onClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <button type="button" class="btn btn-outline-primary btn-sm float-right" (click)="showAddComment = true">Add
+                Comment</button>
+            <mat-form-field>
+                <mat-label>Card Title</mat-label>
+                <input type="text" matInput placeholder="Card Title" [(ngModel)]="cardTitle" class="form-control"
+                    name="cardTite" #title="ngModel">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Card Description</mat-label>
+                <textarea matInput placeholder="Enter your Card Description" [(ngModel)]="cardDescription"
+                    class="form-control" name="cardDescription" #desc="ngModel"></textarea>
+            </mat-form-field>
+            <div *ngIf="showAddComment">
+                <mat-form-field>
+                    <mat-label>Add Comment</mat-label>
+                    <input type="text" matInput placeholder="comment" [(ngModel)]="commentData" class="form-control"
+                        name="commentData" #comment="ngModel">
+                    <button type="button" class="btn btn-outline-primary btn-sm float-right"
+                        (click)="onCommentSubmit()">Add</button>
+                </mat-form-field>
+            </div>
+            <div *ngIf="comments.length>0">
+                <div *ngFor="let text of comments">
+                    <div class="row">
+                        <div class="col-md-8 text-secondary">{{text.text}}</div>
+                        <div class="col-md-4 text-secondary">{{text.time | date}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm float-right" (click)="onCreate()">Create</button>
+    </form>
+</div>
+
+<div *ngIf="data.mode=='view'">
+    <form #viewForm="ngForm">
+        <div mat-dialog-content>
+            <button type="button" class="close float-right btn btn-outline-basic" aria-label="Close"
+                (click)="onClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm float-right" (click)="onDelete()">Delete
+                Card</button>
+            <button type="button" class="btn btn-outline-primary btn-sm float-right" (click)="showAddComment = true">Add
+                Comment</button>
+            <mat-form-field>
+                <mat-label>Card Title</mat-label>
+                <input type="text" matInput placeholder="Card Title" [(ngModel)]="cardTitle" class="form-control"
+                    name="cardTitle" #title="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Card Description</mat-label>
+                <textarea matInput placeholder="Enter your Card Description" [(ngModel)]="cardDescription"
+                    class="form-control" name="cardDescription" #desc="ngModel"></textarea>
+            </mat-form-field>
+            <div *ngIf="showAddComment">
+                <mat-form-field>
+                    <mat-label>Add Comment</mat-label>
+                    <input type="text" matInput placeholder="comment" [(ngModel)]="commentData" class="form-control"
+                        name="commentData" #comment="ngModel">
+                    <button type="button" class="btn btn-outline-primary btn-sm float-right"
+                        (click)="onCommentSubmit()">Add</button>
+                </mat-form-field>
+            </div>
+            <div *ngIf="comments.length>0">
+                <div *ngFor="let text of comments">
+                    <div class="row">
+                        <div class="col-md-8 text-secondary">{{text.text}}</div>
+                        <div class="col-md-4 text-secondary">{{text.time | date}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm float-right" (click)="onSave()">Save</button>
+    </form>
+</div>
